@@ -1,0 +1,18 @@
+Primera parte - PLaificador
+--------------------------------------------------------------------------------
+1) Crear .c y .h con el nombre
+2) Modificar el makefile y añadir el fichero nuevo
+3) Registrar el nuevo planificador: avaiable_schedulers, hay que darle un nombre
+4) Implementar las rutinas, basadas en las rutinas que nos dan hechas de en los 
+   otros archivos que nos dan
+5) En el final del fichero, asignar un nombre de una rutina nuestra a una que   exista
+
+
+Segunda parte - Barreras
+--------------------------------------------------------------------------------
+1) Cambiar el makefile, no definir la variable no se qué, para que entre en la
+    parte de las barreras
+
+Tercea parte - Script
+--------------------------------------------------------------------------------
+1) Script que comprobará el funcionamiento del planificador
