@@ -2,7 +2,9 @@
 
 static task_t* pick_next_task_sjf(runqueue_t* rq)
 {
-	task_t* t=head_slist(&rq->tasks);
+	/* Aqui se está cogiendo la primera (head) por defecto, pero
+	 se debera elegir otro método de planificación */
+	task_t* t = head_slist(&rq->tasks);
 
 	/* Current is not on the rq -> let's remove it */
 	if (t) 
@@ -20,6 +22,10 @@ static int compare_tasks_cpu_burst(void *t1,void *t2)
 
 static void enqueue_task_sjf(task_t* t,runqueue_t* rq, int preempted)
 {
+	/* Aqui se utiliza la insercion ordenada para asegurar que la primera
+	tarea sea la mas corta en tiempo de ejecucion, para luego en la rutina
+	de extraer siguiente tarea, al coger head, sea efectivamente la rutina
+	adecuada segun sjf */
 
 	if (t->on_rq || is_idle_task(t))
 		return;
