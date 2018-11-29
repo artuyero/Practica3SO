@@ -49,11 +49,17 @@ void* philosopher(void* i)
         
         think(nPhilosopher);
         
-        /// TRY TO GRAB BOTH FORKS (right and left)
-
+        // TRY TO GRAB BOTH FORKS (right and left)
+        
+        pthread_mutex_lock(forks[right]);
+        pthread_mutex_lock(forks[left]);
+	
         eat(nPhilosopher);
         
         // PUT FORKS BACK ON THE TABLE
+        
+        pthread_mutex_unlock(forks[right]);
+        pthread_mutex_unlock(forks[left]);
         
         toSleep(nPhilosopher);
    }
