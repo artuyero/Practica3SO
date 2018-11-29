@@ -41,7 +41,7 @@ void toSleep(int i) {
 
 void* philosopher(void* i)
 {
-    int nPhilosopher = (int)i;
+    int nPhilosopher = (int) i;
     int right = nPhilosopher;
     int left = (nPhilosopher - 1 == -1) ? NR_PHILOSOPHERS - 1 : (nPhilosopher - 1);
     while(1)
@@ -51,15 +51,15 @@ void* philosopher(void* i)
         
         // TRY TO GRAB BOTH FORKS (right and left)
         
-        pthread_mutex_lock(forks[right]);
-        pthread_mutex_lock(forks[left]);
+        pthread_mutex_lock(&forks[right]);
+        pthread_mutex_lock(&forks[left]);
 	
         eat(nPhilosopher);
         
         // PUT FORKS BACK ON THE TABLE
         
-        pthread_mutex_unlock(forks[right]);
-        pthread_mutex_unlock(forks[left]);
+        pthread_mutex_unlock(&forks[right]);
+        pthread_mutex_unlock(&forks[left]);
         
         toSleep(nPhilosopher);
    }
