@@ -4,8 +4,8 @@ Primera parte - PLaificador
 2) Modificar el makefile y añadir el fichero nuevo OK
 3) Registrar el nuevo planificador: avaiable_schedulers, hay que darle un nombre OK
 4) Implementar las rutinas, basadas en las rutinas que nos dan hechas de en los 
-   otros archivos que nos dan OK, regular
-5) En el final del fichero, asignar un nombre de una rutina nuestra a una que exista
+   otros archivos que nos dan OK
+5) En el final del fichero, asignar un nombre de una rutina nuestra a una que exista OK
 
 
 Segunda parte - Barreras
