@@ -99,35 +99,35 @@ static void enqueue_task_rr_dq(task_t* t,runqueue_t* rq, int runnable)
     struct rr_data* cs_data=(struct rr_data*) t->tcs_data;
 
     // Comprobacion
-	if (t->on_rq || is_idle_task(t))
-		return;
+    if (t->on_rq || is_idle_task(t))
+	return;
 
 	// Si es tipo INTERACTIVE
     if(cs_data->type == INTERACTIVE) {
     	insert_slist(&rq->tasks, t);
-    	cs_data->remaining_ticks_slice = rr_quantum_int; // INTERACTIVE QUANTUM
+    	cs_data->remaining_ticks_slice = rr_quantum_int;
     }
     // Si es de otro tipo
     else {
     	insert_slist(cpu_bound_tasks, t);
-    	cs_data->remaining_ticks_slice = rr_quantum_cpu; // CPU QUANTUM
+    	cs_data->remaining_ticks_slice = rr_quantum_cpu;
     }
     
 }
 
 static void task_tick_rr_dq(runqueue_t* rq)
 {
-    task_t* current=rq->cur_task;
-    struct rr_data* cs_data=(struct rr_data*) current->tcs_data;
+    task_t* current = rq->cur_task;
+    struct rr_data* cs_data = (struct rr_data*) current->tcs_data;
 
 	if (is_idle_task(current))
 		return;
 
-	cs_data->remaining_ticks_slice--; /* Charge tick */
+	cs_data->remaining_ticks_slice--;
 
-	if (cs_data->remaining_ticks_slice<=0){
+	if (cs_data->remaining_ticks_slice <= 0){
 		cs_data->type = CPU_BOUND;
-		rq->need_resched=TRUE; //Force a resched !!
+		rq->need_resched = TRUE;
 	}
 	else{
 		cs_data->type = INTERACTIVE;
@@ -141,10 +141,10 @@ static task_t* steal_task_rr_dq(runqueue_t* rq)
     // Pointer to the CPU_BOUND tasks list
     slist_t* cpu_bound_tasks = rq->rq_cs_data;
 
-    	task_t* t=tail_slist(cpu_bound_tasks);
+    	task_t* t = tail_slist(cpu_bound_tasks);
 
     	if (t)
-    		remove_slist(cpu_bound_tasks, t); // ?
+    		remove_slist(cpu_bound_tasks, t);
     	else{
     		t = tail_slist(&rq->tasks);
     		if (t)
@@ -152,7 +152,6 @@ static task_t* steal_task_rr_dq(runqueue_t* rq)
     	}
 
     	return t;
-
 }
 
 sched_class_t rr_sched_dq= {
